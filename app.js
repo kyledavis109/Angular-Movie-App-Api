@@ -1,11 +1,8 @@
+const { makeReq } = require('./helperFunctions.js');
 const express = require('express');
-const dotenv = require('dotenv');
 const app = express();
-dotenv.config();
 app.use(express.json())
 require('dotenv').config();
-const fetch = require('node-fetch');
-const { makeReq } = require('./helperFunctions.js');
 
 app.get('/trending', async (req, res) => {
     try {

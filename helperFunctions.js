@@ -6,26 +6,25 @@ async function makeReq(url, method) {
         method,
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${access_token}`
         }
     });
-    
+
     return await response.json();
 };
 
-    module.exports = {
-        makeReq,
-    };
+module.exports = {
+    makeReq,
+};
 
-    async function getToken() {
-        try {
-            const url = `https://api.themoviedb.org/3/authentication/token/new?api_key=${process.env.API_KEY}`;
-            const results = await makeReq(url, 'GET');
-            return res.status(200).json(results.request_token);
-            // console.log(results.request_token)
-            // console.log(results.expires_at)
-        } catch(err) {
-            console.log(err)
-            return res.status(500).send('Server failed to request token');
-        };
-    };
+    // async function getToken() {
+    //     try {
+    //         const url = `https://api.themoviedb.org/3/authentication/token/new?api_key=${process.env.API_KEY}`;
+    //         const results = await makeReq(url, 'GET');
+    //         return res.status(200).json(results.request_token);
+    //         console.log(results.request_token)
+    //         console.log(results.expires_at)
+    //     } catch(err) {
+    //         console.log(err)
+    //         return res.status(500).send('Server failed to request token');
+    //     };
+    // };

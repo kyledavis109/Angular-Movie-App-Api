@@ -25,7 +25,7 @@ async function getToken() {
         console.log(results.expires_at)
     } catch(err) {
         console.log(err)
-        throw 'Failed to get access token.';
+        throw 'Failed to get request token.';
     };
 }
 

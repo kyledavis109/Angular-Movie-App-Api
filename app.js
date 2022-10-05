@@ -20,9 +20,9 @@ async function getToken() {
             throw await response.json();
         };
         const results = await response.json();
-        // return results.request_token;
-        console.log(results.request_token)
-        console.log(results.expires_at)
+        return results.request_token;
+        // console.log(results.request_token)
+        // console.log(results.expires_at)
     } catch(err) {
         console.log(err)
         throw 'Failed to get request token.';
@@ -30,3 +30,27 @@ async function getToken() {
 }
 
 getToken()
+
+async function getTrending() {
+    try {
+        const url = `https://api.themoviedb.org/3/trending/movie/day?api_key=${process.env.API_KEY}`;
+        const response = await fetch(url, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+
+        if (response.status !== 200) {
+            throw await response.json();
+        };
+        const results = await response.json();
+        // return results
+        console.log(results.results[0].title);
+    } catch(err) {
+        console.log(err)
+        throw 'Failed to get access token.';
+    };
+}
+
+getTrending()

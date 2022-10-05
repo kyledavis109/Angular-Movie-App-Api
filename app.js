@@ -3,11 +3,20 @@ const express = require('express');
 const app = express();
 app.use(express.json())
 require('dotenv').config();
+const cors = require('cors');
+app.use(cors({origin: "*"}));
+app.use(function (req, res, next) {
+    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type,Accept, Authorization');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    next();
+});
 
 // Route for getting trending movies of the week.
 app.get('/trending', async (req, res) => {
     try {
-        const url = `https://api.themoviedb.org/3/trending/week/day?api_key=${process.env.API_KEY}`;
+        const url = `https://api.themoviedb.org/3/trending/movie/week?api_key=${process.env.API_KEY}`;
         const results = await makeReq(url, 'GET');
         return res.status(200).json(results.results[0].title);
     } catch(err) {

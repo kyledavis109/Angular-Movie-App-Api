@@ -14,3 +14,8 @@ app.get('/trending', async (req, res) => {
         return res.status(500).send('Server failed to fetch trending movies');
     };
 });
+
+// Start the server listening for requests.
+app.listen(process.env.PORT, async () => {
+    console.log('Server is running...');
+});

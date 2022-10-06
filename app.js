@@ -13,8 +13,8 @@ app.use(function (req, res, next) {
     next();
 });
 
-// Route for getting trending movies of the week.
-app.get('/trending', async (req, res) => {
+// Route for getting trending movies of the week titles.
+app.get('/title', async (req, res) => {
     try {
         const url = `https://api.themoviedb.org/3/trending/movie/week?api_key=${process.env.API_KEY}`;
         const results = await makeReq(url, 'GET');
@@ -24,6 +24,18 @@ app.get('/trending', async (req, res) => {
         return res.status(500).send('Server failed to fetch trending movies');
     };
 });
+
+// Route for getting trending movies of the week poster images.
+app.get('/image', async (req, res) => {
+    try {
+        const url = `https://api.themoviedb.org/3/trending/movie/week?api_key=${process.env.API_KEY}`;
+        const results = await makeReq(url, 'GET');
+        return res.status(200).json(results.results[0].poster_path);
+    } catch(err) {
+        console.log(err)
+        return res.status(500).send('Server failed to fetch trending movies');
+    };
+})
 
 // Start the server listening for requests.
 app.listen(process.env.PORT, async () => {

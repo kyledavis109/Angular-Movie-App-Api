@@ -30,7 +30,7 @@ app.get('/image', async (req, res) => {
     try {
         const url = `https://api.themoviedb.org/3/trending/movie/week?api_key=${process.env.API_KEY}`;
         const results = await makeReq(url, 'GET');
-        return res.status(200).json(results.results[0].poster_path);
+        return res.status(200).json(results.results);
     } catch(err) {
         console.log(err)
         return res.status(500).send('Server failed to fetch trending movies');

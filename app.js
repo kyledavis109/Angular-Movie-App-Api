@@ -25,8 +25,20 @@ app.get('/titles', async (req, res) => {
     };
 });
 
-// Route for getting trending movies of the week poster images.
-app.get('/images', async (req, res) => {
+// Route for getting trending movies of the day's poster images.
+app.get('/dayImages', async (req, res) => {
+    try {
+        const url = `https://api.themoviedb.org/3/trending/movie/day?api_key=${process.env.API_KEY}`;
+        const results = await makeReq(url, 'GET');
+        return res.status(200).json(results.results);
+    } catch(err) {
+        console.log(err)
+        return res.status(500).send('Server failed to fetch trending movies');
+    };
+})
+
+// Route for getting trending movies of the week's poster images.
+app.get('/weekImages', async (req, res) => {
     try {
         const url = `https://api.themoviedb.org/3/trending/movie/week?api_key=${process.env.API_KEY}`;
         const results = await makeReq(url, 'GET');

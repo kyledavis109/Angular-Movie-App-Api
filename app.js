@@ -21,7 +21,7 @@ app.get('/topTvTodayTitles', async (req, res) => {
         return res.status(200).json(results.results);
     } catch(err) {
         console.log(err)
-        return res.status(500).send('Server failed to fetch trending movies');
+        return res.status(500).send('Server failed to fetch top TV shows titles.');
     };
 });
 
@@ -33,7 +33,7 @@ app.get('/topMoviesTodayTitles', async (req, res) => {
         return res.status(200).json(results.results);
     } catch(err) {
         console.log(err)
-        return res.status(500).send('Server failed to fetch trending movies');
+        return res.status(500).send('Server failed to fetch top movies titles.');
     };
 });
 
@@ -45,7 +45,7 @@ app.get('/topTvTodayImages', async (req, res) => {
         return res.status(200).json(results.results);
     } catch(err) {
         console.log(err)
-        return res.status(500).send('Server failed to fetch trending movies');
+        return res.status(500).send('Server failed to fetch top TV shows images.');
     };
 })
 
@@ -57,7 +57,7 @@ app.get('/topMoviesTodayImages', async (req, res) => {
         return res.status(200).json(results.results);
     } catch(err) {
         console.log(err)
-        return res.status(500).send('Server failed to fetch trending movies');
+        return res.status(500).send('Server failed to fetch top movies images.');
     };
 })
 

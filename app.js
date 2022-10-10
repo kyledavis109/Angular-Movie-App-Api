@@ -1,9 +1,13 @@
 const { makeReq } = require('./helperFunctions.js');
+const nodemailer = require("nodemailer");
+const bodyParser = require('body-parser');
 const express = require('express');
 const app = express();
+app.use(bodyParser.json());
 app.use(express.json())
 require('dotenv').config();
 const cors = require('cors');
+app.use(cors());
 app.use(cors({origin: "*"}));
 app.use(function (req, res, next) {
     res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
@@ -60,6 +64,50 @@ app.get('/topMoviesTodayImages', async (req, res) => {
         return res.status(500).send('Server failed to fetch top movies images.');
     };
 })
+
+// Setup credentials to interact with nodemailer.
+let transporter = nodemailer.createTransport({
+    service: 'gmail', // Use preferred email service. Documentation at https://nodemailer.com/about/.
+    auth: {
+        type: 'OAuth2',
+        user: 'kyledavis109@gmail.com',
+        PASSWORD: '60StonedRockSteppen19',
+        clientId: '701161803442-ir7u59hfqj7qn8rt53opdj8icg16qsj8.apps.googleusercontent.com',
+        clientSecret: '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',
+        refreshToken: '1//04-WzRPM_8bB-CgYIARAAGAQSNwF-L9IrcEHpMl7Qwbg52zQzXQkyDxLZGO3gIFbLqRgadP4lxmg-DW89VXUY0wg92L5j9pRPbAc',
+    },
+    port: 587,
+    pool: true,
+    maxConnections: true,
+    maxMessages: true,
+});
+
+// Verifies connection configuration.
+transporter.verify((err, success) => {
+    err ? console.log(err) : console.log(`${success}! Server is ready to take messages!`)
+});
+
+app.post('/sendEmail', function (req, res) {
+    let mailOptions =  {
+        from: req.body.emailAddress,
+        to: process.env.EMAIL,
+        subject: req.body.emailSubject,
+        text: req.body.emailMessage
+    }
+
+    transporter.sendMail(mailOptions, function(err, data) {
+        if (err) {
+            res.json({
+                status: 'fail'
+            });
+        } else {
+            console.log('Email sent successfully');
+            res.json({
+                status: 'success'
+            });
+        }
+    });
+});
 
 // Start the server listening for requests.
 app.listen(process.env.PORT, async () => {

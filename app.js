@@ -65,6 +65,10 @@ app.get('/topMoviesTodayImages', async (req, res) => {
     };
 })
 
+// let authOptions = {
+
+// }
+
 // Setup credentials to interact with nodemailer.
 let transporter = nodemailer.createTransport({
     service: 'gmail', // Use preferred email service. Documentation at https://nodemailer.com/about/.

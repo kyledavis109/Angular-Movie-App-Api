@@ -17,32 +17,8 @@ app.use(function (req, res, next) {
     next();
 });
 
-// Route for getting trending TV shows of the day's titles.
-app.get('/topTvTodayTitles', async (req, res) => {
-    try {
-        const url = `https://api.themoviedb.org/3/trending/tv/day?api_key=${process.env.API_KEY}`;
-        const results = await makeReq(url, 'GET');
-        return res.status(200).json(results.results);
-    } catch(err) {
-        console.log(err)
-        return res.status(500).send('Server failed to fetch top TV shows titles.');
-    };
-});
-
-// Route for getting trending movies of the day's titles.
-app.get('/topMoviesTodayTitles', async (req, res) => {
-    try {
-        const url = `https://api.themoviedb.org/3/trending/movie/day?api_key=${process.env.API_KEY}`;
-        const results = await makeReq(url, 'GET');
-        return res.status(200).json(results.results);
-    } catch(err) {
-        console.log(err)
-        return res.status(500).send('Server failed to fetch top movies titles.');
-    };
-});
-
-// Route for getting trending TV shows of the day's poster images.
-app.get('/topTvTodayImages', async (req, res) => {
+// Route for getting trending TV shows of the day's data.
+app.get('/topTvToday', async (req, res) => {
     try {
         const url = `https://api.themoviedb.org/3/trending/tv/day?api_key=${process.env.API_KEY}`;
         const results = await makeReq(url, 'GET');
@@ -53,8 +29,8 @@ app.get('/topTvTodayImages', async (req, res) => {
     };
 })
 
-// Route for getting trending movies of the day's poster images.
-app.get('/topMoviesTodayImages', async (req, res) => {
+// Route for getting trending movies of the day's data.
+app.get('/topMoviesToday', async (req, res) => {
     try {
         const url = `https://api.themoviedb.org/3/trending/movie/day?api_key=${process.env.API_KEY}`;
         const results = await makeReq(url, 'GET');
@@ -76,14 +52,14 @@ app.get('/topMoviesTodayImages', async (req, res) => {
 
 // Setup credentials to interact with nodemailer.
 let transporter = nodemailer.createTransport({
-    service: 'gmail', // Use preferred email service. Documentation at https://nodemailer.com/about/.
+    service: 'gmail',
     auth: {
         type: 'OAuth2',
-        user: '',
-        pass: '',
-        clientId: '',
-        clientSecret: '',
-        refreshToken: ''
+        user: 'kyledavis109@gmail.com',
+        pass: '60StonedRockSteppen19',
+        clientId: '701161803442-ir7u59hfqj7qn8rt53opdj8icg16qsj8.apps.googleusercontent.com',
+        clientSecret: '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',
+        refreshToken: '1//04PMAgQn32PNzCgYIARAAGAQSNwF-L9Irohe17-lpcQGBdYR4BVhkbqqXvbCe-XaHpMZwhPtHI9XFuN5IozHuTCJeOWvOVCmtJJQ'
     },
     port: 587,
     pool: true,

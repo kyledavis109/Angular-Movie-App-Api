@@ -41,25 +41,25 @@ app.get('/topMoviesToday', async (req, res) => {
     };
 })
 
-// let authOptions = {
-//     type: 'OAuth2',
-//         user: process.env.EMAIL,
-//         pass: process.env.WORD,
-//         clientId: process.env.OAUTH_CLIENT_ID,
-//         clientSecret: process.env.OAUTH_CLIENT_SECRET,
-//         refreshToken: process.env.OAUTH_REFRESH_TOKEN
-// }
+let authOptions = {
+    type: 'OAuth2',
+        user: process.env.EMAIL,
+        pass: process.env.WORD,
+        clientId: process.env.OAUTH_CLIENT_ID,
+        clientSecret: process.env.OAUTH_CLIENT_SECRET,
+        refreshToken: process.env.OAUTH_REFRESH_TOKEN
+}
 
 // Setup credentials to interact with nodemailer.
 let transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
         type: 'OAuth2',
-        user: 'kyledavis109@gmail.com',
-        pass: '60StonedRockSteppen19',
-        clientId: '701161803442-ir7u59hfqj7qn8rt53opdj8icg16qsj8.apps.googleusercontent.com',
-        clientSecret: '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',
-        refreshToken: '1//04PMAgQn32PNzCgYIARAAGAQSNwF-L9Irohe17-lpcQGBdYR4BVhkbqqXvbCe-XaHpMZwhPtHI9XFuN5IozHuTCJeOWvOVCmtJJQ'
+        user: '',
+        pass: '',
+        clientId: '',
+        clientSecret: '',
+        refreshToken: ''
     },
     port: 587,
     pool: true,

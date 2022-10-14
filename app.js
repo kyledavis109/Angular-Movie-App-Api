@@ -41,14 +41,14 @@ app.get('/topMoviesToday', async (req, res) => {
     };
 })
 
-let authOptions = {
-    type: 'OAuth2',
-        user: process.env.EMAIL,
-        pass: process.env.WORD,
-        clientId: process.env.OAUTH_CLIENT_ID,
-        clientSecret: process.env.OAUTH_CLIENT_SECRET,
-        refreshToken: process.env.OAUTH_REFRESH_TOKEN
-}
+// let authOptions = {
+//     type: 'OAuth2',
+//         user: process.env.EMAIL,
+//         pass: process.env.WORD,
+//         clientId: process.env.OAUTH_CLIENT_ID,
+//         clientSecret: process.env.OAUTH_CLIENT_SECRET,
+//         refreshToken: process.env.OAUTH_REFRESH_TOKEN
+// }
 
 // Setup credentials to interact with nodemailer.
 let transporter = nodemailer.createTransport({

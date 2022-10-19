@@ -17,6 +17,19 @@ app.use(function (req, res, next) {
     next();
 });
 
+app.get('/search', async (req, res) => {
+    try {
+        const searchValue = req.body.searchInput;
+        const url = `https://api.themoviedb.org/3/search/movie?api_key=${process.env.API_KEY}&query=${searchValue}`;
+        const results = await makeReq(url, 'GET');
+        console.log(results);
+        return res.status(200).json(results.results);
+    } catch(err) {
+        console.log(err)
+        return res.status(500).send('Server failed to fetch top movies images.');
+    };
+})
+
 // Route for getting trending TV shows of the day's data.
 app.get('/topTvToday', async (req, res) => {
     try {

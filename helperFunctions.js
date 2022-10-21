@@ -6,6 +6,7 @@ async function makeReq(url, method) {
         method,
         headers: {
             'Content-Type': 'application/json',
+            'Content-Type': 'application/x-www-form-urlencoded'
         }
     });
 
